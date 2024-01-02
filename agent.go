@@ -682,6 +682,12 @@ func (agent *Agent) onCCCPNoConfigFromAnyNode(err error) {
 	onCCCPNoConfigFromAnyNode(agent, err)
 }
 
+func (agent *Agent) Pipelines() []*memdPipeline {
+	state := agent.kvMux.getState()
+
+	return state.pipelines
+}
+
 func (agent *Agent) stopped() <-chan struct{} {
 	return agent.shutdownSig
 }

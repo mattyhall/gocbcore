@@ -1,6 +1,7 @@
 package gocbcore
 
 import (
+	"encoding/json"
 	"sync"
 )
 
@@ -83,6 +84,9 @@ func (cm *configManagementComponent) OnNewConfig(cfg *cfgBucket) {
 		cm.configLock.Unlock()
 		return
 	}
+
+	j, _ := json.Marshal(cfg)
+	logDebugf("mjh New config %s", string(j))
 
 	cm.currentConfig = routeCfg
 	cm.seenConfig = true
